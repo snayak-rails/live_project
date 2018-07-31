@@ -1,0 +1,13 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  %a.navbar-brand{:href => "#"} Techracers
+  %button.navbar-toggler{"aria-controls" => "navbarNavAltMarkup", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavAltMarkup", "data-toggle" => "collapse", :type => "button"}
+    %span.navbar-toggler-icon
+  #navbarNavAltMarkup.collapse.navbar-collapse
+    .navbar-nav
+      - nav_class = 'nav-item nav-link'
+      = link_to 'Employess', employees_path, class: nav_class(params[:controller], 'employees')
+      = link_to 'Projects', projects_path, class: nav_class(params[:controller], 'projects')
+
+      = link_to 'Skills', skills_path, class: nav_class(params[:controller], 'skills')
+      - if current_employee
+        = link_to 'Log Out', destroy_employee_session_path, method: :delete, class: 'nav-item nav-link'
