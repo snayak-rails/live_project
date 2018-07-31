@@ -1,0 +1,17 @@
+= simple_form_for @employee do |f|
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :email
+  = f.input :location, collection: Employee::LOCATIONS, include_blank: false
+  = f.input :grade, collection: titleize_keys(Employee.grades.keys), include_blank: false
+  = f.input :salary
+  = f.simple_fields_for :experience do |ex|
+    = ex.input :year, collection: 0..40,  selected: @employee.experience&.fetch('year') || 0
+    = ex.input :month, collection: 0..12, selected: @employee.experience&.fetch('month') || 0
+  = f.input :notes
+  = f.input :engagement, collection: titleize_keys(Employee.engagements.keys), include_blank: false
+  = f.input :roles, collection: titleize_keys(Employee.roles.keys), include_blank: false
+  = f.input :password
+  = f.input :password_confirmation
+  = f.input :is_admin, as: :boolean
+  = f.submit @employee.persisted? ? "Update" : "Create", class: 'btn btn-default'

@@ -4,8 +4,8 @@ class DeviseCreateEmployees < ActiveRecord::Migration[5.2]
   def change
     create_table :employees do |t|
       ## Database authenticatable
-      t.string :email,              null: false, default: ""
-      t.string :encrypted_password, null: false, default: ""
+      t.string :email,              null: false, default: ''
+      t.string :encrypted_password, null: false, default: ''
 
       ## Recoverable
       t.string   :reset_password_token
@@ -35,12 +35,12 @@ class DeviseCreateEmployees < ActiveRecord::Migration[5.2]
       # Custom attributes
       t.string :first_name
       t.string :last_name
-      t.string :grade
+      t.integer :grade
       t.decimal :salary, default: 0.0
       t.jsonb :experience
       t.integer :roles
       t.string :notes
-      t.string :engagement
+      t.integer :engagement
       t.boolean :is_admin, default: false
       t.string :location
       t.references :employees, :lead, index: true
