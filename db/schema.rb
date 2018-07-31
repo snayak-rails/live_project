@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_31_072038) do
+ActiveRecord::Schema.define(version: 2018_07_31_090148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "employee_projects", force: :cascade do |t|
+    t.bigint "employees_id"
+    t.bigint "projects_id"
+    t.datetime "started_at"
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employees_id"], name: "index_employee_projects_on_employees_id"
+    t.index ["projects_id"], name: "index_employee_projects_on_projects_id"
+  end
 
   create_table "employees", force: :cascade do |t|
     t.string "email", default: "", null: false
