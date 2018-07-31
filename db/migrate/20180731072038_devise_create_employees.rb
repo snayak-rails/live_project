@@ -42,6 +42,7 @@ class DeviseCreateEmployees < ActiveRecord::Migration[5.2]
       t.string :notes
       t.string :engagement
       t.boolean :is_admin, default: false
+      t.string :location
       t.references :employees, :lead, index: true
 
       t.timestamps null: false

@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2018_07_31_072038) do
     t.string "notes"
     t.string "engagement"
     t.boolean "is_admin", default: false
+    t.string "location"
     t.bigint "employees_id"
     t.bigint "lead_id"
     t.datetime "created_at", null: false
