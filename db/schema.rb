@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_31_090148) do
+ActiveRecord::Schema.define(version: 2018_07_31_090820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 2018_07_31_090148) do
     t.datetime "updated_at", null: false
     t.index ["employees_id"], name: "index_employee_projects_on_employees_id"
     t.index ["projects_id"], name: "index_employee_projects_on_projects_id"
+  end
+
+  create_table "employee_skills", force: :cascade do |t|
+    t.bigint "employees_id"
+    t.bigint "skills_id"
+    t.jsonb "experience", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employees_id"], name: "index_employee_skills_on_employees_id"
+    t.index ["skills_id"], name: "index_employee_skills_on_skills_id"
   end
 
   create_table "employees", force: :cascade do |t|
@@ -64,6 +74,12 @@ ActiveRecord::Schema.define(version: 2018_07_31_090148) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_projects_on_name"
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
