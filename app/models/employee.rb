@@ -31,6 +31,11 @@ class Employee < ApplicationRecord
 
   LOCATIONS = %w[Indore-T61 Indore-CITP Pune].freeze
 
+  # relations
+
+  has_many :employee_projects
+  has_many :projects, through: :employee_projects
+
   protected
 
   def password_required?

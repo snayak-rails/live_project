@@ -1,0 +1,22 @@
+%table.table
+  %thead
+    %tr
+      %th Name
+      %th Started
+      %th Action
+  %tbody
+    - @employee.employee_projects.each  do |ep|
+      %tr
+        %td= ep.project&.name
+        %td= ep.started_at
+        %td Edit
+  %tfoot
+    = simple_form_for @employee, url: create_employee_projects_employee_path, method: :post do |f|
+      = f.simple_fields_for :employee_projects do |ep|
+        %tr
+          %td
+            = ep.input :project_id, collection: Project.all.map{|project| [project.name, project.id ]}, include_blank: false, label: false
+          %td
+            = ep.input :started_at, as: :date, label: false
+          %td
+            = f.submit "Add", class: 'btn btn-default'
