@@ -1,0 +1,11 @@
+= simple_form_for @employee, url: create_employee_projects_employee_path, method: :post, remote: true do |f|
+  = f.simple_fields_for :employee_projects do |ep|
+    %tr
+      %td
+        = ep.input :project_id, collection: Project.all.map{|project| [project.name, project.id ]}, label: false, include_blank: 'Select Project', required: true
+      %td
+        = ep.input :started_at, as: :date, label: false, prompt: ['day', 'month', 'year'], required: true
+      %td
+        = ep.input :is_current, as: :boolean, class: "project-label", label: 'Current Project'
+      %td
+        = f.submit "Add", class: 'btn btn-default'

@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2018_07_31_090820) do
     t.bigint "project_id"
     t.datetime "started_at"
     t.datetime "completed_at"
+    t.boolean "is_current"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["employee_id"], name: "index_employee_projects_on_employee_id"
@@ -52,10 +53,10 @@ ActiveRecord::Schema.define(version: 2018_07_31_090820) do
     t.integer "grade"
     t.decimal "salary", default: "0.0"
     t.jsonb "experience"
-    t.integer "roles"
+    t.integer "role"
     t.string "notes"
     t.integer "engagement"
-    t.boolean "is_admin", default: false
+    t.integer "profile"
     t.string "location"
     t.bigint "employees_id"
     t.bigint "lead_id"

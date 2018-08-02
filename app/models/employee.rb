@@ -7,14 +7,12 @@ class Employee < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   enum role: {
-    web_developer: 0,
-    mobile_developer: 1,
-    blockchain_developer: 2,
+    super_admin: 0,
+    admin: 1,
+    project_manager: 2,
     lead: 3,
-    designer: 4,
-    qa: 5,
-    tech_lead: 6,
-    project_manager: 7
+    mentor: 4,
+    solution_enginner: 5
   }
 
   enum grade: {
@@ -29,17 +27,41 @@ class Employee < ApplicationRecord
     full_time: 1
   }
 
-  LOCATIONS = %w[Indore-T61 Indore-CITP Pune].freeze
+  enum profile: {
+    web_developer: 0,
+    mobile_developer: 1,
+    blockchain_developer: 2,
+    designer: 4,
+    qa: 5,
+    not_applicable: 6
+  }
 
+  LOCATIONS = %w[Indore-T61 Indore-CITP Pune].freeze
+  ADMIN_ROLES = %w(super_admin admin project_manager lead mentor)
+
+  # scopes
+
+  scope :reporting_managers, -> { where(role: ADMIN_ROLES) }
   # relations
 
   has_many :employee_projects
   has_many :projects, through: :employee_projects
 
+  has_many :employee_skills
+  has_many :skills, through: :employee_skills
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def authorized_employee?
+    ADMIN_ROLES.include?(role)
+  end
+
   protected
 
   def password_required?
-    return false unless is_admin
+    return false unless authorized_employee?
     super
   end
 end

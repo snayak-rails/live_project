@@ -38,10 +38,10 @@ class DeviseCreateEmployees < ActiveRecord::Migration[5.2]
       t.integer :grade
       t.decimal :salary, default: 0.0
       t.jsonb :experience
-      t.integer :roles
+      t.integer :role
       t.string :notes
       t.integer :engagement
-      t.boolean :is_admin, default: false
+      t.integer :profile
       t.string :location
       t.references :employees, :lead, index: true
 

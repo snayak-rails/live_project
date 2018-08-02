@@ -1,0 +1,5 @@
+- @employee.employee_skills.each  do |es|
+  %tr
+    %td= es.skill&.name
+    %td= "#{es.experience['year']} Year and #{es.experience['month']} Months"
+    %td Edit

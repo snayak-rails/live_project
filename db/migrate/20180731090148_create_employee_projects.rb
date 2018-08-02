@@ -7,6 +7,7 @@ class CreateEmployeeProjects < ActiveRecord::Migration[5.2]
       t.references :project, index: true
       t.datetime :started_at
       t.datetime :completed_at
+      t.boolean :is_current
 
       t.timestamps
     end

@@ -10,5 +10,5 @@ Employee.create(
   first_name: 'Gaurav', last_name: 'Soni',
   email: 'g@grepruby.com', password: 'admin123',
   password_confirmation: 'admin123',
-  is_admin: true
+  role: 'super_admin'
 )

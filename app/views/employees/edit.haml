@@ -1,12 +1,51 @@
 .container
-  .card
-    .card-body
-      %h5.card-title Basic Information
-      %h6.card-subtitle.mb-2.text-muted Update basic information
-      = render 'basic_details'
-
+  #accordion
     .card
-      .card-body
-        %h5.card-title Project details
-        %h6.card-subtitle.mb-2.text-muted Update/Add project details
-        = render 'employee_projects'
+      .card-header
+        %a.card-link{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse1"}
+          Basic Information
+      #collapse1.collapse.show{"data-parent" => "#accordion"}
+        .card-body
+          .card
+            .card-body
+              = render 'basic_details'
+    .card
+      .card-header
+        %a.card-link{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse2"}
+          Project Details
+      #collapse2.collapse{"data-parent" => "#accordion"}
+        .card-body
+          .card
+            .card-body
+              %table.table#project-table
+                %thead
+                  %tr
+                    %th Name
+                    %th Started At
+                    %th State
+                    %th Action
+                %tbody
+                  = render 'employee_projects'
+                %tfoot
+                  = render 'employee_project_form'
+    .card
+      .card-header
+        %a.card-link{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse3"}
+          Skill Details
+      #collapse3.collapse{"data-parent" => "#accordion"}
+        .card-body
+          .card
+            .card-body
+
+              %table.table#skill-table
+                %thead
+                  %tr
+                    %th Name
+                    %th Started At
+                    %th Action
+                %tbody
+                  = render 'employee_skills'
+                %tfoot
+                  = render 'employee_skill_form'
+
+

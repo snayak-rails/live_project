@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: %i[edit update create_employee_projects]
-
+  before_action :set_employee, only: %i[edit update create_employee_projects create_employee_skills]
+  before_action :set_leads
   def index
     @employees = Employee.all
   end
@@ -36,11 +36,25 @@ class EmployeesController < ApplicationController
     @employee.employee_projects.build(
       employee_project_params[:employee_projects]
     )
-    if @employee.save
-      flash[:success] = 'Project Added successfully'
-      redirect_to edit_employee_path @employee
-    else
-      render :edit
+    respond_to do |format|
+      if @employee.save
+        format.js {render layout: false}
+      else
+        format.js {render layout: false}
+      end
+    end
+  end
+
+  def create_employee_skills
+    @employee.employee_skills.build(
+      employee_skill_params[:employee_skills]
+    )
+    respond_to do |format|
+      if @employee.save
+        format.js {render layout: false}
+      else
+        format.js {render layout: false}
+      end
     end
   end
 
@@ -51,17 +65,27 @@ class EmployeesController < ApplicationController
                                      :email, :password, :password_confirmation,
                                      :grade,
                                      { experience: %i[year month] }, :salary,
-                                     :engagement, :notes, :roles, :location,
-                                     :is_admin)
+                                     :engagement, :notes, :role, :location,
+                                     :profile)
   end
 
   def employee_project_params
     params.require(:employee).permit(
-      employee_projects: %i[project_id started_at]
+      employee_projects: %i[project_id started_at is_current]
+    )
+  end
+
+  def employee_skill_params
+    params.require(:employee).permit(
+      employee_skills: [ :skill_id, experience: [:year, :month]]
     )
   end
 
   def set_employee
     @employee = Employee.find(params[:id])
+  end
+
+  def set_leads
+    @leads = Employee.reporting_managers
   end
 end

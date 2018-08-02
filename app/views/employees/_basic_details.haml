@@ -1,17 +1,47 @@
-= simple_form_for @employee do |f|
-  = f.input :first_name
-  = f.input :last_name
-  = f.input :email
-  = f.input :location, collection: Employee::LOCATIONS, include_blank: false
-  = f.input :grade, collection: titleize_keys(Employee.grades.keys), include_blank: false
-  = f.input :salary
-  = f.simple_fields_for :experience do |ex|
-    = ex.input :year, collection: 0..40,  selected: @employee.experience&.fetch('year') || 0
-    = ex.input :month, collection: 0..12, selected: @employee.experience&.fetch('month') || 0
-  = f.input :notes
-  = f.input :engagement, collection: titleize_keys(Employee.engagements.keys), include_blank: false
-  = f.input :roles, collection: titleize_keys(Employee.roles.keys), include_blank: false
-  = f.input :password
-  = f.input :password_confirmation
-  = f.input :is_admin, as: :boolean
+= simple_form_for @employee, html: { class: 'form'} do |f|
+  .row
+    .col-md-6
+      = f.input :first_name
+    .col-md-6
+      = f.input :last_name
+  .row
+    .col-md-6
+      = f.input :email
+    .col-md-6
+      = f.input :location, collection: Employee::LOCATIONS, include_blank: false
+  .row
+    .col-md-6
+      = f.input :grade, collection: titleize_keys(Employee.grades.keys), include_blank: false
+    .col-md-6
+      = f.input :salary
+  .row
+    = f.simple_fields_for :experience do |ex|
+      .col-md-6
+        = ex.input :year, collection: 0..40,  selected: @employee.experience&.fetch('year') || 0
+      .col-md-6
+        = ex.input :month, collection: 0..12, selected: @employee.experience&.fetch('month') || 0
+  .row
+    .col-md-6
+      = f.input :profile, collection: titleize_keys(Employee.profiles.keys), include_blank: false
+    .col-md-6
+      = f.input :engagement, collection: titleize_keys(Employee.engagements.keys), include_blank: false
+  .row
+    .col-md-6
+      = f.input :role, collection: titleize_keys(Employee.roles.keys), include_blank: false
+    .col-md-6
+      = f.input :lead_id, collection: leads, include_blank: false
+  .row
+    .col-md-6
+      = f.input :password, disabled: true
+    .col-md-6
+      = f.input :password_confirmation, disabled: true
+      %span.reset_password Reset Password
   = f.submit @employee.persisted? ? "Update" : "Create", class: 'btn btn-default'
+
+:javascript
+  var employee = {
+    is_admin: #{@employee.reload.authorized_employee?},
+    admin_roles: #{ Employee::ADMIN_ROLES.to_json.html_safe }
+  }
+
+  window.employee = employee

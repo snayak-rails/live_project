@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :employees do
     member do
       post :create_employee_projects
+      post :create_employee_skills
     end
   end
 

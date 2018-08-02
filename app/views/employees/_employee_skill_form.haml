@@ -1,0 +1,11 @@
+= simple_form_for @employee, url: create_employee_skills_employee_path, method: :post, remote: true do |f|
+  = f.simple_fields_for :employee_skills do |es|
+    %tr
+      %td
+        = es.input :skill_id, collection: Skill.all.map{|skill| [skill.name, skill.id ]}, include_blank: 'Select Skill', required: true, label: false
+      = es.simple_fields_for :experience do |ex|
+        %td
+          = ex.input :year, collection: 0..10, label: false, prompt: 'Year'
+          = ex.input :month, collection: 0..11, label: false, prompt: 'Month'
+      %td
+        = f.submit "Add", class: 'btn btn-default'
