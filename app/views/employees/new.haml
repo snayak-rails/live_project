@@ -4,3 +4,7 @@
       %h5.card-title Basic Information
       %h6.card-subtitle.mb-2.text-muted Update
       = render 'basic_details'
+
+
+- content_for :footer do
+  = javascript_pack_tag 'employee'

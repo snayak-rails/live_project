@@ -11,5 +11,3 @@ console.log('Hello World from Webpacker')
 import * as jQuery from 'jquery';
 window.jQuery = window.$ = jQuery;
 import 'bootstrap';
-
-import './employee'

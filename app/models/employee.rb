@@ -54,8 +54,24 @@ class Employee < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def current_projects
+    employee_projects.where(is_current: true)
+  end
+
+  def current_project_names
+    current_projects.map{ |cp| cp.project.name }.join(', ')
+  end
+
   def authorized_employee?
     ADMIN_ROLES.include?(role)
+  end
+
+  def skill_names
+    employee_skills.map{ |es| es.skill.name }.join(', ')
+  end
+
+  def humanize_experience
+    "#{experience['year']}y #{experience['month']}m" if experience
   end
 
   protected
