@@ -8,10 +8,10 @@
     .col-md-6
       = f.input :email
     .col-md-6
-      = f.input :location, collection: Employee::LOCATIONS, include_blank: false
+      = f.input :location, collection: titleize(Employee::LOCATIONS), include_blank: false
   .row
     .col-md-6
-      = f.input :grade, collection: titleize_keys(Employee.grades.keys), include_blank: false
+      = f.input :grade, collection: titleize(Employee::GRADES), include_blank: false
     .col-md-6
       = f.input :salary
   .row
@@ -22,12 +22,12 @@
         = ex.input :month, collection: 0..12, selected: @employee.experience&.fetch('month') || 0
   .row
     .col-md-6
-      = f.input :profile, collection: titleize_keys(Employee.profiles.keys), include_blank: false
+      = f.input :profile, collection: titleize(Employee::PROFILES), include_blank: false
     .col-md-6
-      = f.input :engagement, collection: titleize_keys(Employee.engagements.keys), include_blank: false
+      = f.input :engagement, collection: titleize(Employee::ENGAGEMENTS), include_blank: false
   .row
     .col-md-6
-      = f.input :role, collection: titleize_keys(Employee.roles.keys), include_blank: 'Select Role'
+      = f.input :role, collection: titleize(Employee::ROLES), include_blank: 'Select Role'
     .col-md-6
       = f.input :lead_id, collection: leads, include_blank: 'Select Lead'
   .row

@@ -1,11 +1,21 @@
+var $  = require( 'jquery' );
+
+require('datatables.net-bs')()
+require('datatables.net-buttons-bs')()
+require('datatables.net-buttons/js/buttons.colVis.js')()
+require('datatables.net-buttons/js/buttons.html5.js')()
+require('datatables.net-buttons/js/buttons.print.js')
+require('datatables.net-responsive-bs')()
+require('datatables.net-select')()
+
 $(".reset_password").click(function(){
-    if($('.password').attr('disabled')){
-      $('.password').removeAttr('disabled')
-      $('.reset_password').text('Cancel')
-    } else {
-      $('.password').attr('disabled', 'disabled')
-      $('.reset_password').text('Reset Password')
-    }
+  if($('.password').attr('disabled')){
+    $('.password').removeAttr('disabled')
+    $('.reset_password').text('Cancel')
+  } else {
+    $('.password').attr('disabled', 'disabled')
+    $('.reset_password').text('Reset Password')
+  }
 });
 
 $('#employee_role').on('change', function() {
@@ -18,3 +28,27 @@ $('#employee_role').on('change', function() {
     $('.reset_password').text('Reset Password')
   }
 })
+
+jQuery(document).ready(function() {
+  $('#employee-datatable').dataTable({
+    "processing": true,
+    "serverSide": true,
+    "ajax": $('#employee-datatable').data('source'),
+    "pagingType": "full_numbers",
+    "columns": [
+      {"data": "name"},
+      {"data": "role"},
+      {"data": "grade"},
+      {"data": "location"},
+      {"data": "profile"},
+      {"data": "engagement"},
+      {"data": "projects"},
+      {"data": "skills"},
+      {"data": "edit"},
+
+    ]
+    // pagingType is optional, if you want full pagination controls.
+    // Check dataTables documentation to learn more about
+    // available options.
+  });
+});

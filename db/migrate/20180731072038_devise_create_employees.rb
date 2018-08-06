@@ -35,13 +35,13 @@ class DeviseCreateEmployees < ActiveRecord::Migration[5.2]
       # Custom attributes
       t.string :first_name
       t.string :last_name
-      t.integer :grade
+      t.string :grade
       t.decimal :salary, default: 0.0
       t.jsonb :experience
-      t.integer :role
+      t.string :role
       t.string :notes
-      t.integer :engagement
-      t.integer :profile
+      t.string :engagement
+      t.string :profile
       t.string :location
       t.references :employees, :lead, index: true
 

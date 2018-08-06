@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 module EmployeesHelper
-  def titleize_keys(keys)
-    keys.map { |key, _value| [key.humanize.titleize, key] }
+  def titleize(args)
+    return [] unless args.is_a?(Array)
+    args.map { |arg| [arg.titleize, arg] }
   end
 
   def leads

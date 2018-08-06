@@ -3,8 +3,12 @@
 class EmployeesController < ApplicationController
   before_action :set_employee, only: %i[edit update create_employee_projects create_employee_skills]
   before_action :set_leads
+
   def index
-    @employees = Employee.all
+    respond_to do |format|
+      format.html
+      format.json { render json: EmployeesDatatable.new(view_context) }
+    end
   end
 
   def new

@@ -77,3 +77,25 @@ tfoot {
   color: blue;
   cursor: pointer;
 }
+
+.container{
+  .emp-table {
+    margin-top: 4%;
+  }
+}
+
+.myCollapse {
+    display: none;
+}
+.myCollapse.in {
+  display: block;
+}
+
+
+.employee_employee_skills_experience_year, .employee_employee_skills_experience_month {
+  float: left;
+  width: 50%;
+}
+
+
+

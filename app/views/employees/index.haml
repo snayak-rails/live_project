@@ -1,18 +1,18 @@
 .container
-  %h2 Employee
-  %table.table
+  %table.display.stripe.no-wrap#employee-datatable{"data-source" => "#{employees_path(format: :json)}"}
     %thead
       %tr
-        %th Email
-        %th Firstname
-        %th Lastname
-        %th Location
+        %th Name
+        %th Role
+        %th Grade
+        %th location
+        %th Profile
+        %th Engagement
+        %th Projects
+        %th Skills
+        %th Action
     %tbody
-      - @employees.each do |employee|
-        %tr
-          %td= link_to employee.email, edit_employee_path(employee.id)
-          %td= employee.first_name
-          %td= employee.last_name
-          %td= employee.location
 
-  = link_to 'Add Employee', new_employee_path
+
+- content_for :footer do
+  = javascript_pack_tag 'employee'

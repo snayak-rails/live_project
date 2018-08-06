@@ -6,38 +6,33 @@ class Employee < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  enum role: {
-    super_admin: 0,
-    admin: 1,
-    project_manager: 2,
-    lead: 3,
-    mentor: 4,
-    solution_enginner: 5
-  }
+   ROLES =  [
+    'super admin',
+    'admin',
+    'project manager',
+    'lead',
+    'mentor',
+    'solution enginner'
+   ]
 
-  enum grade: {
-    a: 0,
-    b: 1,
-    c: 2,
-    d: 3
-  }
 
-  enum engagement: {
-    partial: 0,
-    full_time: 1
-  }
+  GRADES = [ 'A', 'B', 'C', 'D']
 
-  enum profile: {
-    web_developer: 0,
-    mobile_developer: 1,
-    blockchain_developer: 2,
-    designer: 4,
-    qa: 5,
-    not_applicable: 6
-  }
+  ENGAGEMENTS = [ 'full time', 'partial' ]
+
+  PROFILES = [
+    'web developer',
+    'mobile developer',
+    'blockchain developer',
+    'designer',
+    'qa',
+    'not applicable'
+  ]
+
 
   LOCATIONS = %w[Indore-T61 Indore-CITP Pune].freeze
-  ADMIN_ROLES = %w(super_admin admin project_manager lead mentor)
+
+  ADMIN_ROLES = [ 'super admin', 'admin', 'project manager', 'lead', 'mentor']
 
   # scopes
 
@@ -49,6 +44,7 @@ class Employee < ApplicationRecord
 
   has_many :employee_skills
   has_many :skills, through: :employee_skills
+
 
   def full_name
     "#{first_name} #{last_name}"
