@@ -2,10 +2,10 @@
   = f.simple_fields_for :employee_skills do |es|
     %tr
       %td
-        = es.input :skill_id, collection: Skill.all.map{|skill| [skill.name, skill.id ]}, include_blank: 'Select Skill', required: true, label: false
+        = es.input :skill_id, collection: @skills, include_blank: 'Select Skill', required: true, label: false
       = es.simple_fields_for :experience do |ex|
         %td
           = ex.input :year, collection: 0..10, label: false, prompt: 'Year'
           = ex.input :month, collection: 0..11, label: false, prompt: 'Month'
       %td
-        = f.submit "Add", class: 'btn btn-default'
+        = f.submit "Add", class: 'btn btn-primary'

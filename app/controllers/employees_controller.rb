@@ -3,6 +3,7 @@
 class EmployeesController < ApplicationController
   before_action :set_employee, only: %i[edit update create_employee_projects create_employee_skills edit_employee_project]
   before_action :set_leads
+  before_action :set_projects, :set_skills, only: [:edit, :update, :create_employee_projects, :create_employee_skills]
 
   def index
     respond_to do |format|
@@ -106,5 +107,13 @@ class EmployeesController < ApplicationController
 
   def set_leads
     @leads = Employee.reporting_managers
+  end
+
+  def set_projects
+    @projects = Project.all
+  end
+
+  def set_skills
+    @skills = Skill.all
   end
 end

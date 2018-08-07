@@ -31,7 +31,7 @@ class EmployeesDatatable < AjaxDatatablesRails::Base
         projects: record.current_project_names,
         skills: record.skill_names,
         lead: record.lead&.full_name,
-        edit: link_to("<i class='fa fa-pencil-square-o' aria-hidden='true'></i>".html_safe, edit_employee_path(record)),
+        edit: link_to("<i class='fa fa-pencil-square-o fa-2x' aria-hidden='true'></i>".html_safe, edit_employee_path(record)),
         DT_RowId: record.id
       }
     end
