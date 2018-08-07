@@ -49,9 +49,9 @@ class Employee < ApplicationRecord
   # Validations
   validates :first_name, :last_name, presence: true
   validates :role, presence: true, inclusion: ROLES
-  validates :engagement, inclusion: ENGAGEMENTS
-  validates :profile, inclusion: PROFILES
-  validates :location, presence: true, inclusion: LOCATIONS
+  validates :engagement, inclusion: ENGAGEMENTS, unless: :super_admin?
+  validates :profile, inclusion: PROFILES, unless: :super_admin?
+  validates :location, presence: true, inclusion: LOCATIONS, unless: :super_admin?
   validates :salary, presence: true, unless: :super_admin?
   validates :lead_id, presence: true, if: :lead_required?
 
