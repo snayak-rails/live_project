@@ -1,0 +1,4 @@
+= simple_form_for @skill, html: { class: 'form', id: 'Login'} do |f|
+  .form-group
+    = f.input :name
+  = f.submit @skill.persisted? ? 'Update' : 'Create', class: 'btn btn-primary'

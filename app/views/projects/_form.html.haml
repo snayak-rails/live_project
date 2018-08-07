@@ -1,0 +1,8 @@
+= simple_form_for @project, html: { class: 'form', id: 'Login'} do |f|
+  .form-group
+    = f.input :name
+  .form-group
+    = f.input :client_name
+  .form-group
+    = f.input :category
+  = f.submit @project.persisted? ? 'Update' : 'Create', class: 'btn btn-primary btn-submit'
