@@ -1,0 +1,19 @@
+
+.container
+  .row
+    .col-md-12
+      %h4 Skills
+      .table-responsive
+        %table#mytable.table.table-bordred.table-striped
+          %thead
+            %th Name
+            %th Edit
+          %tbody
+            - @skills.each do |skill|
+              %tr
+                %td= skill.name
+                %td
+                  = link_to edit_skill_path(skill) do
+                    %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+  .row
+    = link_to 'New Skill', new_skill_path
