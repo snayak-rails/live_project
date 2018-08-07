@@ -38,7 +38,7 @@ class EmployeesDatatable < AjaxDatatablesRails::Base
   end
 
   def get_raw_records
-    Employee.left_outer_joins(:projects, :skills, :lead).distinct
+    Employee.exclude_super_admin.left_outer_joins(:projects, :skills, :lead).distinct
   end
 
 end

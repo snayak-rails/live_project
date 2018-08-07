@@ -17,7 +17,7 @@ class Employee < ApplicationRecord
 
   GRADES = %w[A B C D].freeze
 
-  ENGAGEMENTS = ['full time', 'partial'].freeze
+  ENGAGEMENTS = ['full time', 'partial', 'available'].freeze
 
   PROFILES = [
     'web developer',
@@ -35,6 +35,7 @@ class Employee < ApplicationRecord
   # scopes
 
   scope :reporting_managers, -> { where(role: ADMIN_ROLES) }
+  scope :exclude_super_admin, -> { where.not(role: 'super admin') }
   # relations
 
   has_many :employee_projects
@@ -79,6 +80,14 @@ class Employee < ApplicationRecord
     "#{experience['year']}y #{experience['month']}m" if experience
   end
 
+  def super_admin?
+    return true if role.eql?('super admin')
+  end
+
+  def admin?
+    return true if role.eql?('admin')
+  end
+
   protected
 
   def password_required?
@@ -86,13 +95,6 @@ class Employee < ApplicationRecord
     super
   end
 
-  def super_admin?
-    return true if role.eql?('super admin')
-  end
-
-  def admin?
-    return true if role.eql?('super admin')
-  end
 
   def lead_required?
     return true unless super_admin? || admin?
