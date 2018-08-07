@@ -14,7 +14,8 @@ class EmployeesDatatable < AjaxDatatablesRails::Base
       profile: { source: 'Employee.profile', cond: :like },
       engagement: { source: 'Employee.engagement', cond: :like },
       projects: { source: "Project.name", cond: :like },
-      skills: { source: "Skill.name", cond: :like }
+      skills: { source: "Skill.name", cond: :like },
+      lead: { source: "Employee.first_name", cond: :like }
     }
   end
 
@@ -29,14 +30,15 @@ class EmployeesDatatable < AjaxDatatablesRails::Base
         engagement: record.engagement&.titleize,
         projects: record.current_project_names,
         skills: record.skill_names,
-        edit: link_to('Edit', edit_employee_path(record)),
+        lead: record.lead&.full_name,
+        edit: link_to("<i class='fa fa-pencil-square-o' aria-hidden='true'></i>".html_safe, edit_employee_path(record)),
         DT_RowId: record.id
       }
     end
   end
 
   def get_raw_records
-    Employee.left_outer_joins(:projects, :skills).distinct
+    Employee.left_outer_joins(:projects, :skills, :lead).distinct
   end
 
 end

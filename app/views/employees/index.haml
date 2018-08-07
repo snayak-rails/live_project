@@ -10,9 +10,11 @@
         %th Engagement
         %th Projects
         %th Skills
+        %th Lead
         %th Action
     %tbody
 
+  = link_to 'New Employee', new_employee_path
 
 - content_for :footer do
   = javascript_pack_tag 'employee'

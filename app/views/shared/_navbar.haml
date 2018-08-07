@@ -5,7 +5,7 @@
   #navbarNavAltMarkup.collapse.navbar-collapse
     .navbar-nav
       - nav_class = 'nav-item nav-link'
-      = link_to 'Employess', employees_path, class: nav_class(params[:controller], 'employees')
+      = link_to 'Employess', employees_path, class: nav_class(params[:controller], 'employees'), data: { turbolinks: false }
       = link_to 'Projects', projects_path, class: nav_class(params[:controller], 'projects')
 
       = link_to 'Skills', skills_path, class: nav_class(params[:controller], 'skills')

@@ -6,19 +6,18 @@ class Employee < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-   ROLES =  [
+  ROLES = [
     'super admin',
     'admin',
     'project manager',
     'lead',
     'mentor',
     'solution enginner'
-   ]
+  ].freeze
 
+  GRADES = %w[A B C D].freeze
 
-  GRADES = [ 'A', 'B', 'C', 'D']
-
-  ENGAGEMENTS = [ 'full time', 'partial' ]
+  ENGAGEMENTS = ['full time', 'partial'].freeze
 
   PROFILES = [
     'web developer',
@@ -27,12 +26,11 @@ class Employee < ApplicationRecord
     'designer',
     'qa',
     'not applicable'
-  ]
-
+  ].freeze
 
   LOCATIONS = %w[Indore-T61 Indore-CITP Pune].freeze
 
-  ADMIN_ROLES = [ 'super admin', 'admin', 'project manager', 'lead', 'mentor']
+  ADMIN_ROLES = ['super admin', 'admin', 'project manager', 'lead', 'mentor'].freeze
 
   # scopes
 
@@ -45,6 +43,17 @@ class Employee < ApplicationRecord
   has_many :employee_skills
   has_many :skills, through: :employee_skills
 
+  belongs_to :lead, class_name: 'Employee', optional: true
+  has_many :team_members, class_name: 'Employee', foreign_key: 'lead_id'
+
+  # Validations
+  validates :first_name, :last_name, presence: true
+  validates :role, presence: true, inclusion: ROLES
+  validates :engagement, inclusion: ENGAGEMENTS
+  validates :profile, inclusion: PROFILES
+  validates :location, presence: true, inclusion: LOCATIONS
+  validates :salary, presence: true, unless: :super_admin?
+  validates :lead_id, presence: true, if: :lead_required?
 
   def full_name
     "#{first_name} #{last_name}"
@@ -55,7 +64,7 @@ class Employee < ApplicationRecord
   end
 
   def current_project_names
-    current_projects.map{ |cp| cp.project.name }.join(', ')
+    current_projects.map { |cp| cp.project.name }.join(', ')
   end
 
   def authorized_employee?
@@ -63,7 +72,7 @@ class Employee < ApplicationRecord
   end
 
   def skill_names
-    employee_skills.map{ |es| es.skill.name }.join(', ')
+    employee_skills.map { |es| es.skill.name }.join(', ')
   end
 
   def humanize_experience
@@ -75,5 +84,17 @@ class Employee < ApplicationRecord
   def password_required?
     return false unless authorized_employee?
     super
+  end
+
+  def super_admin?
+    return true if role.eql?('super admin')
+  end
+
+  def admin?
+    return true if role.eql?('super admin')
+  end
+
+  def lead_required?
+    return true unless super_admin? || admin?
   end
 end

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     member do
       post :create_employee_projects
       post :create_employee_skills
+      get :edit_employee_project
+      put :update_employee_project
     end
   end
 

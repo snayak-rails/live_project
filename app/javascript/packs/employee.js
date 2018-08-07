@@ -44,7 +44,8 @@ jQuery(document).ready(function() {
       {"data": "engagement"},
       {"data": "projects"},
       {"data": "skills"},
-      {"data": "edit"},
+      {"data": "lead"},
+      {"data": "edit"}
 
     ]
     // pagingType is optional, if you want full pagination controls.

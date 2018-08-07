@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: %i[edit update create_employee_projects create_employee_skills]
+  before_action :set_employee, only: %i[edit update create_employee_projects create_employee_skills edit_employee_project]
   before_action :set_leads
 
   def index
@@ -59,6 +59,21 @@ class EmployeesController < ApplicationController
       else
         format.js {render layout: false}
       end
+    end
+  end
+
+  def edit_employee_project
+    @employee_project = @employee.employee_projects.find(params[:project_id])
+    respond_to do |format|
+      format.js {render layout: false}
+    end
+  end
+
+  def update_employee_project
+    byebug
+    @employee_project = @employee.employee_projects.find(params[:project_id])
+    respond_to do |format|
+      format.js {render layout: false}
     end
   end
 

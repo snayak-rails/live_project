@@ -1,6 +1,8 @@
 - @employee.employee_projects.each  do |ep|
-  %tr
+  %tr{id: "row_#{ep.id}"}
     %td= ep.project&.name
     %td= ep.started_at&.strftime('%d/%m/%y')
     %td= ep.is_current ? 'Ongoing': 'Stale'
-    %td Edit
+    %td
+      = link_to edit_employee_project_employee_path(@employee, params: { project_id: ep.id }), data: { remote: true } do
+        %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}

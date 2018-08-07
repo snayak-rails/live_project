@@ -17,9 +17,9 @@
   .row
     = f.simple_fields_for :experience do |ex|
       .col-md-6
-        = ex.input :year, collection: 0..40,  selected: @employee.experience&.fetch('year') || 0
+        = ex.input :year, collection: 0..40,  selected: @employee.experience&.fetch('year') || 0, label: 'Experience in years'
       .col-md-6
-        = ex.input :month, collection: 0..12, selected: @employee.experience&.fetch('month') || 0
+        = ex.input :month, collection: 0..12, selected: @employee.experience&.fetch('month') || 0, label: 'Experience in months'
   .row
     .col-md-6
       = f.input :profile, collection: titleize(Employee::PROFILES), include_blank: false
@@ -30,6 +30,9 @@
       = f.input :role, collection: titleize(Employee::ROLES), include_blank: 'Select Role'
     .col-md-6
       = f.input :lead_id, collection: leads, include_blank: 'Select Lead'
+  .row
+    .col-md-12
+      = f.input :notes, as: :text
   .row
     -  disabled = @employee.authorized_employee? && !@employee.persisted? ? false : true
     .col-md-6
