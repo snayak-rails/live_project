@@ -13,8 +13,9 @@ class EmployeesDatatable < AjaxDatatablesRails::Base
       location: { source: 'Employee.location', cond: :like },
       profile: { source: 'Employee.profile', cond: :like },
       engagement: { source: 'Employee.engagement', cond: :like },
-      projects: { source: "Project.name", cond: :like },
-      skills: { source: "Skill.name", cond: :like },
+      experience: { source: 'Employee.experience', cond: :like },
+      projects: { source: "Project.name", cond: :like, orderable: false },
+      skills: { source: "Skill.name", cond: :like, orderable: false },
       lead: { source: "Employee.first_name", cond: :like }
     }
   end
@@ -28,6 +29,7 @@ class EmployeesDatatable < AjaxDatatablesRails::Base
         location: record.location,
         profile: record.profile&.titleize,
         engagement: record.engagement&.titleize,
+        experience: record.humanize_experience,
         projects: record.current_project_names,
         skills: record.skill_names,
         lead: record.lead&.full_name,

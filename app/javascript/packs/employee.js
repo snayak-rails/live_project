@@ -42,6 +42,7 @@ jQuery(document).ready(function() {
       {"data": "location"},
       {"data": "profile"},
       {"data": "engagement"},
+      {"data": "experience"},
       {"data": "projects"},
       {"data": "skills"},
       {"data": "lead"},
