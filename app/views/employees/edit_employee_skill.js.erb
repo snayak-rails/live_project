@@ -1,0 +1,1 @@
+$("#row_skill_<%= @employee_skill.id%>").html("<%= escape_javascript render(partial: 'employee_skill_update_form', locals: { employee_skill: @employee_skill }) %>")

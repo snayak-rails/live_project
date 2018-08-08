@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: %i[edit update create_employee_projects create_employee_skills edit_employee_project]
+  before_action :set_employee, except: %i[index new]
   before_action :set_leads
-  before_action :set_projects, :set_skills, only: [:edit, :update, :create_employee_projects, :create_employee_skills]
+  before_action :set_projects, :set_skills, only: [:edit, :update, :create_employee_projects, :create_employee_skills, :edit_employee_skill]
 
   def index
     respond_to do |format|
@@ -71,10 +71,31 @@ class EmployeesController < ApplicationController
   end
 
   def update_employee_project
-    byebug
-    @employee_project = @employee.employee_projects.find(params[:project_id])
+    @employee_project = @employee.employee_projects.find(params[:employee][:employee_projects][:employee_project_id])
+    respond_to do |format|
+      if @employee_project.update_attributes(employee_project_params[:employee_projects])
+        format.js {render layout: false}
+      else
+        format.js {render layout: false}
+      end
+    end
+  end
+
+  def edit_employee_skill
+    @employee_skill = @employee.employee_skills.find(params[:skill_id])
     respond_to do |format|
       format.js {render layout: false}
+    end
+  end
+
+  def update_employee_skill
+    @employee_skill = @employee.employee_skills.find(params[:employee][:employee_skills][:employee_skill_id])
+    respond_to do |format|
+      if @employee_skill.update_attributes(employee_skill_params[:employee_skills])
+        format.js {render layout: false}
+      else
+        format.js {render layout: false}
+      end
     end
   end
 

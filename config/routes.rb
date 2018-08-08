@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       post :create_employee_skills
       get :edit_employee_project
       put :update_employee_project
+      get :edit_employee_skill
+      put :update_employee_skill
     end
   end
 

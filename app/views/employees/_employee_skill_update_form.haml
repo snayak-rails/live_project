@@ -1,0 +1,12 @@
+= simple_form_for @employee, url: update_employee_skill_employee_path, method: :put, remote: true, html: {class: 'form-inline col-md-12 skill-form'} do |f|
+  = f.simple_fields_for :employee_skills do |es|
+    = es.hidden_field :employee_skill_id, value: employee_skill.id
+    .col-md-5
+      = es.input :skill_id, collection: @skills, include_blank: 'Select Skill', required: true, label: false,  selected: employee_skill.skill&.id
+    .col-md-5
+      = es.simple_fields_for :experience do |ex|
+        = ex.input :year, collection: 0..10, label: false, prompt: 'Year', selected: employee_skill.experience['year']
+        = ex.input :month, collection: 0..11, label: false, prompt: 'Month',selected: employee_skill.experience['year']
+    .col-md-2.text-center
+      = f.submit "Update", class: 'btn btn-primary'
+

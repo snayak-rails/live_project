@@ -41,46 +41,6 @@
     }
   }
 }
-#collapse2, #collapse3{
-  .card-body {
-    padding: 0 !important;
-    .card-body {
-      padding: 0 !important;
-    }
-    .table{
-      margin-bottom: 20px;
-      thead {
-        background: #000;
-        color: #fff;
-      }
-      tbody{
-        tr{
-          background-color: #ccc;
-        }
-
-        i {
-          font-size: 26px;
-        }
-      }
-    }
-  }
-}
-.form-check {
-  margin-top:  5px;
-  label {
-    margin-left: 20px;
-  }
-}
-tfoot {
-  tr {
-    td{
-      padding-bottom: 0 !important;
-      .form-group {
-        margin-bottom: 0 !important;
-      }
-    }
-  }
-}
 
 .reset_password {
   font-size: 12px;
@@ -110,5 +70,42 @@ tfoot {
   width: 50%;
 }
 
+#employee_employee_projects_project_id {
+  width: 100%;
+}
+
+.data-header {
+    background: #333;
+    color: #fff;
+    // padding: 10px;
+}
+
+.data-header h3 {
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+#project-rows .row,
+#project-rows~.row {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-top: 0;
+}
+
+.row.data-header [class*="col-"] {
+    border-right: 1px solid #fff;
+    padding: 10px;
+}
 
 
+
+#skill-rows .row,
+#skill-rows~.row {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-top: 0;
+}
+
+.skill-form .form-control {
+  width: 100%;
+}

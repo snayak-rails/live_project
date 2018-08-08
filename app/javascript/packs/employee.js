@@ -33,6 +33,7 @@ jQuery(document).ready(function() {
   $('#employee-datatable').dataTable({
     "processing": true,
     "serverSide": true,
+    "bSort": true,
     "ajax": $('#employee-datatable').data('source'),
     "pagingType": "full_numbers",
     "columns": [

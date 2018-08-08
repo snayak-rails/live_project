@@ -1,6 +1,9 @@
 - @employee.employee_skills.each  do |es|
-  %tr
-    %td= es.skill&.name
-    %td= "#{es.experience['year']} Year and #{es.experience['month']} Months"
-    %td
-      %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+  .row.project-data{id: "row_skill_#{es.id}"}
+    .col-md-5.text-center
+      = es.skill&.name
+    .col-md-5.text-center
+      = "#{es.experience['year']} Year and #{es.experience['month']} Months"
+    .col-md-2.text-center
+      = link_to edit_employee_skill_employee_path(@employee, params: { skill_id: es.id }), data: { remote: true } do
+        %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}

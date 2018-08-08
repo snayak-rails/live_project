@@ -1,11 +1,10 @@
-= simple_form_for @employee, url: create_employee_skills_employee_path, method: :post, remote: true do |f|
+= simple_form_for @employee, url: create_employee_skills_employee_path, method: :post, remote: true, html: {class: 'form-inline col-md-12 skill-form'} do |f|
   = f.simple_fields_for :employee_skills do |es|
-    %tr
-      %td
-        = es.input :skill_id, collection: @skills, include_blank: 'Select Skill', required: true, label: false
+    .col-md-5
+      = es.input :skill_id, collection: @skills, include_blank: 'Select Skill', required: true, label: false
+    .col-md-5
       = es.simple_fields_for :experience do |ex|
-        %td
-          = ex.input :year, collection: 0..10, label: false, prompt: 'Year'
-          = ex.input :month, collection: 0..11, label: false, prompt: 'Month'
-      %td
-        = f.submit "Add", class: 'btn btn-primary'
+        = ex.input :year, collection: 0..10, label: false, prompt: 'Year'
+        = ex.input :month, collection: 0..11, label: false, prompt: 'Month'
+    .col-md-2.text-center
+      = f.submit "Add", class: 'btn btn-primary'

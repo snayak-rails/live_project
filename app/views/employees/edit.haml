@@ -17,17 +17,19 @@
         .card-body
           .card
             .card-body
-              %table.table#project-table
-                %thead
-                  %tr
-                    %th Name
-                    %th Started At
-                    %th State
-                    %th Action
-                %tbody
-                  = render 'employee_projects'
-                %tfoot
-                  = render 'employee_project_form'
+              .row.data-header
+                .col-md-3.text-center
+                  %h3 Name
+                .col-md-4.text-center
+                  %h3 Started At
+                .col-md-3.text-center
+                  %h3 State
+                .col-md-2.text-center
+                  %h3 Action
+              #project-rows
+                = render 'employee_projects'
+              .row
+                = render 'employee_project_form'
     .card
       .card-header
         %a.card-link{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse3"}
@@ -36,17 +38,17 @@
         .card-body
           .card
             .card-body
-
-              %table.table#skill-table
-                %thead
-                  %tr
-                    %th Name
-                    %th Expereince
-                    %th Action
-                %tbody
-                  = render 'employee_skills'
-                %tfoot
-                  = render 'employee_skill_form'
+              .row.data-header
+                .col-md-5.text-center
+                  %h3 Name
+                .col-md-5.text-center
+                  %h3 Experience
+                .col-md-2.text-center
+                  %h3 Action
+              #skill-rows
+                = render 'employee_skills'
+              .row
+                = render 'employee_skill_form'
 
 
 - content_for :footer do
