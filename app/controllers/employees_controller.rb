@@ -3,7 +3,10 @@
 class EmployeesController < ApplicationController
   before_action :set_employee, except: %i[index new create]
   before_action :set_leads
-  before_action :set_projects, :set_skills, only: [:edit, :update, :create_employee_projects, :create_employee_skills, :edit_employee_skill, :edit_employee_project]
+  before_action :set_projects, :set_skills, only: %i[
+    edit update create_employee_projects create_employee_skills
+    edit_employee_skill edit_employee_project
+  ]
 
   def index
     respond_to do |format|
@@ -38,64 +41,56 @@ class EmployeesController < ApplicationController
   end
 
   def create_employee_projects
-    @employee.employee_projects.build(
+    @employee.employee_projects.create(
       employee_project_params[:employee_projects]
     )
     respond_to do |format|
-      if @employee.save
-        format.js {render layout: false}
-      else
-        format.js {render layout: false}
-      end
+      format.js { render layout: false }
     end
   end
 
   def create_employee_skills
-    @employee.employee_skills.build(
+    @employee.employee_skills.create(
       employee_skill_params[:employee_skills]
     )
     respond_to do |format|
-      if @employee.save
-        format.js {render layout: false}
-      else
-        format.js {render layout: false}
-      end
+      format.js { render layout: false }
     end
   end
 
   def edit_employee_project
     @employee_project = @employee.employee_projects.find(params[:project_id])
     respond_to do |format|
-      format.js {render layout: false}
+      format.js { render layout: false }
     end
   end
 
   def update_employee_project
-    @employee_project = @employee.employee_projects.find(params[:employee][:employee_projects][:employee_project_id])
+    @employee_project = @employee.employee_projects.find(
+      params[:employee][:employee_projects][:employee_project_id]
+    )
+    @employee_project.update_attributes(
+      employee_project_params[:employee_projects]
+    )
     respond_to do |format|
-      if @employee_project.update_attributes(employee_project_params[:employee_projects])
-        format.js {render layout: false}
-      else
-        format.js {render layout: false}
-      end
+      format.js { render layout: false }
     end
   end
 
   def edit_employee_skill
     @employee_skill = @employee.employee_skills.find(params[:skill_id])
     respond_to do |format|
-      format.js {render layout: false}
+      format.js { render layout: false }
     end
   end
 
   def update_employee_skill
-    @employee_skill = @employee.employee_skills.find(params[:employee][:employee_skills][:employee_skill_id])
+    @employee_skill = @employee.employee_skills.find(
+      params[:employee][:employee_skills][:employee_skill_id]
+    )
+    @employee_skill.update_attributes(employee_skill_params[:employee_skills])
     respond_to do |format|
-      if @employee_skill.update_attributes(employee_skill_params[:employee_skills])
-        format.js {render layout: false}
-      else
-        format.js {render layout: false}
-      end
+      format.js { render layout: false }
     end
   end
 
@@ -118,7 +113,7 @@ class EmployeesController < ApplicationController
 
   def employee_skill_params
     params.require(:employee).permit(
-      employee_skills: [ :skill_id, experience: [:year, :month]]
+      employee_skills: [:skill_id, experience: %i[year month]]
     )
   end
 

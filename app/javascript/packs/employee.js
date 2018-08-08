@@ -49,6 +49,9 @@ jQuery(document).ready(function() {
       {"data": "lead"},
       {"data": "edit"}
 
+    ],
+    "columnDefs": [
+       { "orderable": false, "targets": [ -1, -2, -3, -4, -5 ] }
     ]
     // pagingType is optional, if you want full pagination controls.
     // Check dataTables documentation to learn more about

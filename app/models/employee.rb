@@ -30,7 +30,8 @@ class Employee < ApplicationRecord
 
   LOCATIONS = %w[Indore-T61 Indore-CITP Pune].freeze
 
-  ADMIN_ROLES = ['super admin', 'admin', 'project manager', 'lead', 'mentor'].freeze
+  ADMIN_ROLES = ['super admin', 'admin',
+                 'project manager', 'lead', 'mentor'].freeze
 
   # scopes
 
@@ -52,7 +53,8 @@ class Employee < ApplicationRecord
   validates :role, presence: true, inclusion: ROLES
   validates :engagement, inclusion: ENGAGEMENTS, unless: :super_admin?
   validates :profile, inclusion: PROFILES, unless: :super_admin?
-  validates :location, presence: true, inclusion: LOCATIONS, unless: :super_admin?
+  validates :location, presence: true, inclusion: LOCATIONS,
+                       unless: :super_admin?
   validates :salary, presence: true, unless: :super_admin?
   validates :lead_id, presence: true, if: :lead_required?
 
@@ -94,7 +96,6 @@ class Employee < ApplicationRecord
     return false unless authorized_employee?
     super
   end
-
 
   def lead_required?
     return true unless super_admin? || admin?
