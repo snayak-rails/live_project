@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class EmployeesController < ApplicationController
-  before_action :set_employee, except: %i[index new]
+  before_action :set_employee, except: %i[index new create]
   before_action :set_leads
-  before_action :set_projects, :set_skills, only: [:edit, :update, :create_employee_projects, :create_employee_skills, :edit_employee_skill]
+  before_action :set_projects, :set_skills, only: [:edit, :update, :create_employee_projects, :create_employee_skills, :edit_employee_skill, :edit_employee_project]
 
   def index
     respond_to do |format|

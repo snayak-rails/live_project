@@ -2,10 +2,10 @@
   = f.simple_fields_for :employee_projects do |ep|
     = ep.hidden_field :employee_project_id, value: employee_project.id
     .col-md-3
-      = ep.input :project_id, collection: Project.all.map{|project| [project.name, project.id ]}, label: false, include_blank: 'Select Project', required: true, selected: employee_project.project&.id
+      = ep.input :project_id, collection: @projects, label: false, include_blank: 'Select Project', required: true, selected: employee_project.project&.id
     .col-md-4
       = ep.input :started_at, as: :date, label: false, prompt: ['day', 'month', 'year'], required: true, selected: employee_project.started_at
     .col-md-3
-      = ep.input :is_current, as: :boolean, class: "project-label", label: 'Current Project', value: employee_project.is_current
+      = ep.input :is_current, as: :boolean, class: "project-label", label: 'Current Project', value: employee_project.is_current, input_html: { id: "is_current#{employee_project.id}", checked: employee_project.is_current }
     .col-md-2.text-center
       = f.submit "Update", class: 'btn btn-primary'
