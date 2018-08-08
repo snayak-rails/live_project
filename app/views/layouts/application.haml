@@ -12,8 +12,9 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     = render 'shared/navbar'
-    - flash.each do |key, value|
-      %div{:class => "alert alert-#{key}"}= value
+    .container
+      - flash.each do |key, value|
+        %div{:class => "alert alert-#{key}"}= value
 
     = yield
     = javascript_pack_tag 'application'
