@@ -1,13 +1,18 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  %a.navbar-brand{:href => "#"} Techracers
-  %button.navbar-toggler{"aria-controls" => "navbarNavAltMarkup", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavAltMarkup", "data-toggle" => "collapse", :type => "button"}
-    %span.navbar-toggler-icon
-  #navbarNavAltMarkup.collapse.navbar-collapse
-    .navbar-nav
-      - nav_class = 'nav-item nav-link'
-      = link_to 'Employess', employees_path, class: nav_class(params[:controller], 'employees'), data: { turbolinks: false }
-      = link_to 'Projects', projects_path, class: nav_class(params[:controller], 'projects')
-
-      = link_to 'Skills', skills_path, class: nav_class(params[:controller], 'skills')
-      - if current_employee
-        = link_to 'Log Out', destroy_employee_session_path, method: :delete, class: 'nav-item nav-link'
+  .container-fluid
+    %a.navbar-brand{:href => "#"}
+      %img{ src: "#{asset_pack_path 'logo.png'}" }
+    %button.navbar-toggler{"aria-controls" => "navbarNavDropdown", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavDropdown", "data-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    #navbarNavDropdown.navbar-collapse.collapse
+      %ul.navbar-nav.mr-auto
+      %ul.navbar-nav
+        %li.nav-item.active
+          = link_to 'Employess', employees_path, class: nav_class(params[:controller], 'employees'), data: { turbolinks: false }
+        %li.nav-item
+          = link_to 'Projects', projects_path, class: nav_class(params[:controller], 'projects')
+        %li.nav-item
+          = link_to 'Skills', skills_path, class: nav_class(params[:controller], 'skills')
+        %li.nav-item
+          - if current_employee
+            = link_to 'Log Out', destroy_employee_session_path, method: :delete, class: 'nav-item nav-link'
