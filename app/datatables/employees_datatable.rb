@@ -3,7 +3,7 @@
 class EmployeesDatatable < AjaxDatatablesRails::Base
   extend Forwardable
 
-  def_delegators :@view, :link_to, :edit_employee_path
+  def_delegators :@view, :link_to, :edit_employee_path, :current_employee
 
   def view_columns
     # Declare strings in this format: ModelName.column_name
@@ -46,7 +46,14 @@ class EmployeesDatatable < AjaxDatatablesRails::Base
   end
 
   def get_raw_records
-    Employee.exclude_super_admin
-            .left_outer_joins(:projects, :skills, :lead).distinct
+    if current_employee.admin? || current_employee.super_admin?
+      Employee.exclude_super_admin
+              .left_outer_joins(:projects, :skills, :lead).distinct
+    elsif current_employee.project_manager?
+      Employee.exclude_super_admin
+              .left_outer_joins(:projects, :skills, :lead).where(employees: { employee_projects: { project_id: current_employee.projects.pluck(:id), is_current: true } }).distinct
+    else
+      current_employee.team_members.left_outer_joins(:projects, :skills, :lead).distinct
+    end
   end
 end

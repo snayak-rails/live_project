@@ -2,7 +2,8 @@
   #accordion
     .card
       .card-header
-        %a.card-link{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse1"}
+        %a.card-link.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse1"}
+          %i.fa{"aria-hidden" => "true"}
           Basic Information
       #collapse1.collapse{"data-parent" => "#accordion"}
         .card-body
@@ -12,6 +13,7 @@
     .card
       .card-header
         %a.card-link{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse2"}
+          %i.fa{"aria-hidden" => "true"}
           Project Details
       #collapse2.collapse.show{"data-parent" => "#accordion"}
         .card-body
@@ -32,7 +34,8 @@
                 = render 'employee_project_form'
     .card
       .card-header
-        %a.card-link{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse3"}
+        %a.card-link.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse3"}
+          %i.fa{"aria-hidden" => "true"}
           Skill Details
       #collapse3.collapse{"data-parent" => "#accordion"}
         .card-body

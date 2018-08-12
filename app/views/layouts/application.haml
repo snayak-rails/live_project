@@ -6,10 +6,10 @@
     %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"}
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'true'
     = stylesheet_pack_tag    'styles/application'
     = stylesheet_pack_tag    "styles/#{params[:controller]}"
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'true'
   %body
     = render 'shared/navbar'
     .container
@@ -17,5 +17,5 @@
         %div{:class => "alert alert-#{key}"}= value
 
     = yield
-    = javascript_pack_tag 'application'
+  = javascript_pack_tag 'application', 'data-turbolinks-track': 'true'
   = yield :footer

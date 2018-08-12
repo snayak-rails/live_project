@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class EmployeesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_employee, except: %i[index new create]
   before_action :set_leads
   before_action :set_projects, :set_skills, only: %i[

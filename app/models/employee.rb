@@ -45,7 +45,7 @@ class Employee < ApplicationRecord
   has_many :employee_skills
   has_many :skills, through: :employee_skills
 
-  belongs_to :lead, class_name: 'Employee', optional: true
+  belongs_to :lead, class_name: 'Employee', optional: true, foreign_key: 'lead_id'
   has_many :team_members, class_name: 'Employee', foreign_key: 'lead_id'
 
   # Validations
@@ -83,11 +83,23 @@ class Employee < ApplicationRecord
   end
 
   def super_admin?
-    return true if role.eql?('super admin')
+    role.eql?('super admin')
   end
 
   def admin?
-    return true if role.eql?('admin')
+    role.eql?('admin')
+  end
+
+  def project_manager?
+    role.eql?('project manager')
+  end
+
+  def lead?
+    role.eql?('lead')
+  end
+
+  def mentor?
+    role.eql?('mentor')
   end
 
   protected
